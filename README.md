@@ -1,4 +1,5 @@
-# RTanque [![Build Status](https://travis-ci.org/awilliams/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque)
+# RTanque [![Build Status](https://travis-ci.org/devscola/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) 
+<!-- [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque) -->
 
 **What is this?**
 RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tank and then send their tank+brain into battle with other tanks. All tanks are otherwise equal.

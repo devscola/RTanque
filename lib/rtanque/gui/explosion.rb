@@ -9,7 +9,7 @@ module RTanque
         @window = window
         @explosion = explosion
         @position = [explosion.position.x, window.height - explosion.position.y]
-        @explosion_images = FRAMES.map { |i| Gosu::Image.new(@window, Gui.resource_path("images/explosions/explosion2-#{i}.png")) }
+        @explosion_images = FRAMES.map { |i| Gosu::Image.new(Gui.resource_path("images/explosions/explosion2-#{i}.png")) }
       end
 
       def draw

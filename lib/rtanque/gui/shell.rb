@@ -12,7 +12,7 @@ module RTanque
         @shell = shell
         @x0 = shell.position.x
         @y0 = @window.height - shell.position.y
-        @shell_image = Gosu::Image.new(@window, Gui.resource_path("images/bullet.png"))
+        @shell_image = Gosu::Image.new(Gui.resource_path("images/bullet.png"))
       end
 
       def draw

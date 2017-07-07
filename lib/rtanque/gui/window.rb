@@ -25,7 +25,7 @@ module RTanque
         # Fullscreen: https://github.com/jlnr/gosu/issues/159#issuecomment-12473172
         super(@arena.width, @arena.height, false, UPDATE_INTERVAL)
         self.caption = self.class.name.split('::').first
-        @background = Gosu::Image.new(self, Gui.resource_path("images/grass.png"))
+        @background = Gosu::Image.new(Gui.resource_path("images/grass.png"))
 
         @draw_procs = []
       end

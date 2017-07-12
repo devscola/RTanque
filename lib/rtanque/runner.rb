@@ -27,7 +27,9 @@ module RTanque
 
     # Starts the match
     # @param [Boolean] gui if false, runs headless match
-    def start(gui = true)
+    def start(gui = true, broadcast = false)
+      @match = BroadcastedMatch.new(match) if broadcast
+
       if gui
         require 'rtanque/gui'
         window = RTanque::Gui::Window.new(self.match)
@@ -37,6 +39,7 @@ module RTanque
         trap(:INT) { self.match.stop }
         self.match.start
       end
+
     end
 
     protected

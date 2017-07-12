@@ -28,6 +28,8 @@ LONGDESC
   method_option :gc, :default => true, :type => :boolean, :banner => 'disable GC (EXPERIMENTAL)'
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
+  method_option :broadcast, :default => false, :type => :boolean, :banner => 'broadcast info about battle'
+
   def start(*brain_paths)
     Kernel.srand(options[:seed])
     runner = RTanque::Runner.new(options[:width], options[:height], options[:max_ticks], options[:teams])
@@ -40,7 +42,7 @@ LONGDESC
       end
     }
     self.print_start_banner(runner) unless options[:quiet]
-    self.set_gc(options[:gc]) { runner.start(options[:gui]) }
+    self.set_gc(options[:gc]) { runner.start(options[:gui], options[:broadcast]) }
     self.print_runner_stats(runner) unless options[:quiet]
   end
 

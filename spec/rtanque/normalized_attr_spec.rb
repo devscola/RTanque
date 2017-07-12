@@ -38,7 +38,7 @@ describe RTanque::NormalizedAttr do
 
     it 'should call block for max_delta' do
       attached = double('some_object')
-      attached.should_receive(:max_delta).and_return(0.1)
+      expect(attached).to receive(:max_delta).and_return(0.1)
       expect(instance.max_delta(attached)).to eq 0.1
     end
 

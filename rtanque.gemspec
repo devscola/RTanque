@@ -29,6 +29,6 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.add_dependency 'texplay', '~> 0.4.4.pre'
 
   gem.add_development_dependency 'pry'
-  gem.add_development_dependency 'rspec', '~> 2.13.0'
-  gem.add_development_dependency 'rspec-mocks', '~> 2.13.0'
+  gem.add_development_dependency 'rspec', '~> 3.6'
+  gem.add_development_dependency 'rspec-mocks', '~> 3.6'
 end

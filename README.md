@@ -1,3 +1,9 @@
+While I find a better way to come across this this gem requires
+```
+gem 'texplay', :github => 'devscola/texplay', branch: 'fix_gosu_deprecation_warnings'
+```
+in Gemfile
+
 **Forked from [awilliams](https://github.com/awilliams/RTanque) to update some versions**
 **Some ideas also used by [andrew](https://github.com/andrew/RTanque/commit/0f974784a259906bc2ca970be2f8dff2c860c2a2)**
 # RTanque [![Build Status](https://travis-ci.org/devscola/RTanque.png?branch=master)](https://travis-ci.org/devscola/RTanque)

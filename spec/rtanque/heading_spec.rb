@@ -110,7 +110,7 @@ describe RTanque::Heading do
     end
 
     it 'creates frozen object' do
-      expect(described_class.new(0).frozen?).to be_true
+      expect(described_class.new(0).frozen?).to be true
     end
   end
 
@@ -135,43 +135,43 @@ describe RTanque::Heading do
   describe '#==' do
     it 'works like Numeric, ignoring type' do
       a = described_class.new(1.0)
-      expect(a == 1).to be_true
+      expect(a == 1).to be true
     end
 
     it 'correctly compares two equal headings' do
       a = described_class.new(1.0)
       b = described_class.new(1.0)
-      expect(a == b).to be_true
+      expect(a == b).to be true
     end
 
     it 'correctly compares two different headings' do
       a = described_class.new(0)
       b = described_class.new(1.0)
-      expect(a == b).to be_false
+      expect(a == b).to be false
     end
 
     it 'compares to a numeric on LHS' do
       a = described_class.new(Math::PI)
-      expect(Math::PI == a).to be_true
+      expect(Math::PI == a).to be true
     end
   end
 
   describe '#eql?' do
     it 'compares types like Numeric, comparing type' do
       a = described_class.new(1.0)
-      expect(a.eql?(1)).to be_false
+      expect(a.eql?(1)).to be false
     end
 
     it 'correctly compares two equal headings' do
       a = described_class.new(1.0)
       b = described_class.new(1.0)
-      expect(a.eql?(b)).to be_true
+      expect(a.eql?(b)).to be true
     end
 
     it 'correctly compares two different headings' do
       a = described_class.new(0)
       b = described_class.new(1.0)
-      expect(a.eql?(b)).to be_false
+      expect(a.eql?(b)).to be false
     end
   end
 

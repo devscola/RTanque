@@ -62,7 +62,7 @@
 			if (scenes.length > 0)
 				drawBots(arena, scenes.shift().bots)
 
-			setTimeout(play, 250)
+			setTimeout(play, 20)
 		}
 
 		play()
@@ -81,8 +81,6 @@
 
 				if (parsedData.tick)
 					scenes.push(parsedData.scene)
-
-
 
 			}
 			catch(error){

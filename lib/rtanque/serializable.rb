@@ -6,6 +6,7 @@ module RTanque
           name: name,
           health: health,
           heading: heading.radians,
+          dead: dead?,
           position: position.to_h.reject{ |k,_|
             k == :arena
           },

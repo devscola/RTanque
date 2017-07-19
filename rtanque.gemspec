@@ -27,8 +27,8 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.add_dependency 'octokit', '~> 2.7.0'
   gem.add_dependency 'thor', '~> 0.17.0'
   gem.add_dependency 'texplay', '~> 0.4.4.pre'
-  gem.add_dependency 'awesome_print'
-
+  gem.add_dependency 'faye-websocket', '~> 0.10.7'
+  gem.add_dependency 'thin', '~> 1.7.2'
 
   gem.add_development_dependency 'pry'
   gem.add_development_dependency 'rspec', '~> 3.6'

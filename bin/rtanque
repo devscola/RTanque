@@ -29,6 +29,9 @@ LONGDESC
   method_option :quiet, :aliases => '-q', :default => false, :type => :boolean, :banner => 'disable chatter'
   method_option :seed, :default => Kernel.srand, :type => :numeric, :banner => 'random number seed value'
   method_option :broadcast, :default => false, :type => :boolean, :banner => 'broadcast info about battle'
+  method_option :interval, :default => 1, :type => :numeric, :banner => 'broadcast every n ticks'
+  method_option :port, :default => 8080, :type => :numeric, :banner => 'port to bradcast match'
+  method_option :audience, :default => 0, :type => :numeric, :banner => 'minimum audience to broadcast match'
 
   def start(*brain_paths)
     Kernel.srand(options[:seed])
@@ -42,7 +45,9 @@ LONGDESC
       end
     }
     self.print_start_banner(runner) unless options[:quiet]
-    self.set_gc(options[:gc]) { runner.start(options[:gui], options[:broadcast]) }
+    self.set_gc(options[:gc]) {
+      runner.start(options[:gui], options[:broadcast], options[:port], options[:interval], options[:audience])
+    }
     self.print_runner_stats(runner) unless options[:quiet]
   end
 

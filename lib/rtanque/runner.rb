@@ -27,8 +27,8 @@ module RTanque
 
     # Starts the match
     # @param [Boolean] gui if false, runs headless match
-    def start(gui = true, broadcast = false)
-      @match = BroadcastedMatch.new(match) if broadcast
+    def start(gui = true, broadcast = false, port = 8080, interval = 1, audience = 0)
+      @match = Server.new(SerializableMatch.new(match), port, interval, audience) if broadcast
 
       if gui
         require 'rtanque/gui'

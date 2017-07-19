@@ -39,7 +39,7 @@ module RTanque
     module Match
       def to_h
         {
-          arena: arena.to_h,
+          # arena: arena.to_h,
           bots: bots.map(&:to_h),
           shells: shells.map(&:to_h),
           explosions: explosions.map(&:to_h)

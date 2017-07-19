@@ -5,15 +5,15 @@ module RTanque
         {
           name: name,
           health: health,
-          heading: heading.to_degrees,
+          heading: heading.radians,
           position: position.to_h.reject{ |k,_|
             k == :arena
           },
           radar: {
-            heading: radar.heading.to_degrees
+            heading: radar.heading.radians
           },
           turret: {
-            heading: turret.heading.to_degrees
+            heading: turret.heading.radians
           }
         }
       end
@@ -22,7 +22,7 @@ module RTanque
     module Shell
       def to_h
         {
-          heading: heading.to_degrees,
+          heading: heading.radians,
           position: position.to_h.reject{ |k,_| k == :arena}
         }
       end

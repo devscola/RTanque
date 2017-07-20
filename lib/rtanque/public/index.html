@@ -10,6 +10,7 @@
 
 	<script type="text/javascript" >
 		window.scenes = []
+		window.started = false
 
 		var createArena = function(size){
 			var canvas = document.createElement('canvas')
@@ -27,10 +28,22 @@
 		var botBox = function(coords){
 			return [
 				coords.x - botWidth/2,
-				coords.y - botHeight/2,
+				arena.height - coords.y - botHeight/2,
 				botWidth,
 				botHeight
 			]
+		}
+
+		var healthColor = function(health) {
+			var r = 0
+			var g = 0
+			var b = 0
+
+			var g = 255 * health / 150
+			var r = 255 - 255 * health / 150
+
+
+			return 'rgb('+r+','+g+','+b+')'
 		}
 
 		var drawBots = function(arena, bots){
@@ -39,12 +52,15 @@
 			ctx.fillRect(0, 0, arena.width, arena.height)
 
 			bots.forEach(function(bot){
+				if (bot.dead)
+					return
+
 				ctx.save();
 				ctx.beginPath();
 				// ctx.translate(bot.position.x, bot.position.y);
 				// ctx.rotate(bot.heading);
 				ctx.rect.apply(ctx, botBox(bot.position));
-				ctx.fillStyle = "maroon";
+				ctx.fillStyle = healthColor(bot.health);
 				ctx.fill();
 				ctx.lineWidth = 2;
 				ctx.strokeStyle = "wheat";
@@ -52,24 +68,55 @@
 				ctx.closePath();
 				ctx.restore();
 			})
-
 		}
 
-		var play = function(){
-			console.log('play')
-			console.log(scenes.length)
+		var drawShells = function(arena, shells){
+			var ctx = arena.getContext('2d')
 
-			if (scenes.length > 0)
-				drawBots(arena, scenes.shift().bots)
+			shells.forEach(function(shell){
+				ctx.save();
+				ctx.beginPath();
+				ctx.arc(shell.position.x, arena.height - shell.position.y, 2, 0, 2*Math.PI);
+				ctx.fillStyle = 'maroon';
+				ctx.fill();
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = "wheat";
+				ctx.stroke();
+				ctx.closePath();
+				ctx.restore();
+			})
+		}
+
+		var drawExplosions = function(arena, explosions){
+			var ctx = arena.getContext('2d')
+
+			explosions.forEach(function(explosion){
+				ctx.save();
+				ctx.beginPath();
+				ctx.arc(explosion.position.x, arena.height - explosion.position.y, 20, 0, 2*Math.PI);
+				ctx.fillStyle = 'white';
+				ctx.fill();
+				ctx.lineWidth = 1;
+				ctx.strokeStyle = "wheat";
+				ctx.stroke();
+				ctx.closePath();
+				ctx.restore();
+			})
+		}
+
+
+		var play = function(){
+			if (scenes.length > 0){
+				var currentScene = scenes.shift()
+				drawBots(arena, currentScene.bots)
+				drawShells(arena, currentScene.shells)
+				drawExplosions(arena, currentScene.explosions)
+			}
 
 			setTimeout(play, 20)
 		}
 
-		play()
-
-
 		var ws = new WebSocket('ws://__HOST__:__PORT__')
-		// console.log(ws)
 
 		ws.onmessage = function(e){
 			try {
@@ -79,8 +126,14 @@
 				if (parsedData.arena)
 					window.arena = createArena(parsedData.arena)
 
-				if (parsedData.tick)
+				if (parsedData.tick){
 					scenes.push(parsedData.scene)
+
+					if (!started && scenes.length > 50){
+						play()
+						started = true
+					}
+				}
 
 			}
 			catch(error){

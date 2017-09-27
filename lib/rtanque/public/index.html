@@ -66,7 +66,13 @@
 				ctx.strokeStyle = "wheat";
 				ctx.stroke();
 				ctx.closePath();
+
+				ctx.font = '10px arial'
+				ctx.fillStyle = 'black'
+				ctx.fillText(bot.health.toFixed(0), bot.position.x - botWidth/2, arena.height - bot.position.y)
+
 				ctx.restore();
+
 			})
 		}
 

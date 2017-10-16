@@ -20,8 +20,8 @@ There exist a few sample bots to help get started:
 \x5 * sample_bots/seek_and_destroy
 \x5 * sample_bots/camper
 LONGDESC
-  method_option :width, :aliases => '-w', :default => 1200, :type => :numeric, :banner => 'width of window'
-  method_option :height, :aliases => '-h', :default => 700, :type => :numeric, :banner => 'height of window'
+  method_option :width, :aliases => '-w', :default => 800, :type => :numeric, :banner => 'width of window'
+  method_option :height, :aliases => '-h', :default => 450, :type => :numeric, :banner => 'height of window'
   method_option :max_ticks, :aliases => '-m', :default => Float::INFINITY, :type => :numeric, :banner => 'max ticks allowed per match'
   method_option :teams, :default => false, :type => :boolean, :banner => 'true to do a team based match based on tank names'
   method_option :gui, :default => false, :type => :boolean, :banner => 'false to run headless(default)'

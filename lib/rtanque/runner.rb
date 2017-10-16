@@ -31,10 +31,15 @@ module RTanque
       @match = Server.new(SerializableMatch.new(match), port, interval, audience) if broadcast
 
       if gui
-        require 'rtanque/gui'
-        window = RTanque::Gui::Window.new(self.match)
-        trap(:INT) { window.close }
-        window.show
+        begin
+          require 'rtanque/gui'
+          window = RTanque::Gui::Window.new(self.match)
+          trap(:INT) { window.close }
+          window.show
+        rescue ::LoadError => e
+          puts 'This version of rtanque(core) needs rtanque_gui gem to run with graphics'
+          exit 1
+        end
       else
         trap(:INT) { self.match.stop }
         self.match.start

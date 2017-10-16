@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rtanque/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "rtanque"
+  gem.name          = "rtanque_core"
   gem.version       = RTanque::VERSION
   gem.authors       = ["Adam Williams"]
   gem.email         = ["pwnfactory@gmail.com"]
@@ -13,8 +13,11 @@ Gem::Specification.new do |gem|
 
 Rules of the game are simple: Last bot standing wins. Gameplay is also pretty simple. Each tank has a base, turret and radar, each of which rotate independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
 
-Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.}
-  gem.homepage      = "https://github.com/devscola/RTanque"
+Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup.
+
+This gem provides the core without gui, for that you'll need rtanque_gui.
+}
+  gem.homepage      = "https://github.com/devscola/RTanque_core"
   gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
@@ -22,11 +25,9 @@ Have fun competing against friends' tanks or the sample ones included. Maybe you
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'gosu', '~> 0.12.1'
   gem.add_dependency 'configuration', '~> 1.3.2'
   gem.add_dependency 'octokit', '~> 2.7.0'
   gem.add_dependency 'thor', '~> 0.17.0'
-  gem.add_dependency 'texplay', '~> 0.4.4.pre'
   gem.add_dependency 'faye-websocket', '~> 0.10.7'
   gem.add_dependency 'thin', '~> 1.7.2'
 

@@ -1,9 +1,0 @@
-language: ruby
-gemfile: Gemfile.ci
-script: bundle exec rspec
-rvm:
-  - 2.0.0
-  - 2.2.0
-branches:
-  only:
-    - master

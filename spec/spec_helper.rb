@@ -22,8 +22,11 @@ RSpec.configure do |config|
 
   config.before(:all) do
     @arena = RTanque::Arena.new(100, 100)
-    RTanque::Configuration.config do
-      raise_brain_tick_errors false # errors should be correctly captured
+
+    class RTanque::Configuration
+      def self.raise_brain_tick_errors
+        false
+      end
     end
   end
 

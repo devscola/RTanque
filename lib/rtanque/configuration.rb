@@ -1,47 +1,109 @@
-require 'configuration'
-
 module RTanque
-  one_degree = (Math::PI / 180.0)
+  class Configuration
+    ONE_DEGREE = (Math::PI / 180.0)
 
-  # @!visibility private
-  Configuration = ::Configuration.for('default') do
-    raise_brain_tick_errors true
-    quit_when_finished true
 
-    bot do
-      radius 19
-      health_reduction_on_exception 2
-      health 0..100
-      speed -3..3
-      speed_step 0.05
-      turn_step one_degree * 1.5
-      fire_power 1..5
-      gun_energy_max 10
-      gun_energy_factor 10
+    def self.raise_brain_tick_errors
+      true
     end
-    turret do
-      length 28
-      turn_step (one_degree * 2.0)
+
+    def self.quit_when_finished
+      true
     end
-    radar do
-      turn_step 0.05
-      vision -(one_degree * 10.0)..(one_degree * 10.0)
+
+    def self.bot
+      @bot ||= Bot.new
     end
-    shell do
-      speed_factor 4.5
-      ratio 1.5 # used by Bot#adjust_fire_power and to calculate damage done by shell to bot
+
+    def self.turret
+      @turret ||= Turret.new
     end
-    explosion do
-      life_span 70 * 1 # should be multiple of the number of frames in the explosion animation
+
+    def self.radar
+      @radar ||= Radar.new
     end
-    gui do
-      update_interval 16.666666 # in milliseconds. 16.666666 == 60 FPS
-      fonts do
-        small 16
+
+    def self.shell
+      @shell ||= Shell.new
+    end
+
+    def self.explosion
+      @explosion ||= Explosion.new
+    end
+
+    private
+      class Bot
+        def radius
+          19
+        end
+
+        def health_reduction_on_exception
+          2
+        end
+
+        def health
+          0..100
+        end
+
+        def speed
+          -3..3
+        end
+
+        def speed_step
+          0.05
+        end
+
+        def turn_step
+          ONE_DEGREE * 1.5
+        end
+
+        def fire_power
+          1..5
+        end
+
+        def gun_energy_max
+          10
+        end
+
+        def gun_energy_factor
+          10
+        end
+      end
+
+      class Turret
+        def length
+          28
+        end
+
+        def turn_step
+          (ONE_DEGREE * 2.0)
+        end
+      end
+
+      class Radar
+        def turn_step
+          0.05
+        end
+
+        def vision
+          -(ONE_DEGREE * 10.0)..(ONE_DEGREE * 10.0)
+        end
+      end
+
+      class Shell
+        def speed_factor
+          4.5
+        end
+
+        def ratio
+          1.5 # used by Bot#adjust_fire_power and to calculate damage done by shell to bot
+        end
+      end
+
+      class Explosion
+        def life_span
+          70 * 1 # should be multiple of the number of frames in the explosion animation
+        end
       end
     end
-  end
-  def Configuration.config(&block)
-    ::Configuration::DSL.evaluate(self, &block)
-  end
 end

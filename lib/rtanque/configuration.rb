@@ -31,6 +31,10 @@ module RTanque
       @explosion ||= Explosion.new
     end
 
+    def self.gui
+      @gui ||= Gui.new
+    end
+
     private
       class Bot
         def radius
@@ -103,6 +107,22 @@ module RTanque
       class Explosion
         def life_span
           70 * 1 # should be multiple of the number of frames in the explosion animation
+        end
+      end
+
+      class Gui
+        class Fonts
+          def small
+            16
+          end
+        end
+
+        def update_interval
+          16.666666
+        end
+
+        def fonts
+          @fonts ||= Fonts.new
         end
       end
     end

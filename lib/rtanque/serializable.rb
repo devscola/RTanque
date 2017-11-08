@@ -17,7 +17,7 @@ module RTanque
       def to_h
         {
           name: name,
-          health: health,
+          health: Serializable.rounded(health),
           heading: Serializable.rounded(heading.radians),
           dead: dead?,
           position: Serializable.normalize(position),

@@ -1,20 +1,31 @@
 module RTanque
   module Serializable
+
+    def self.rounded number
+      number.round 3
+    end
+
+    def self.normalize position
+      position.to_h.reject { |k,_|
+        k == :arena
+      }.map { |coordinate, value|
+        [coordinate, rounded(value)]
+      }.to_h
+    end
+
     module Bot
       def to_h
         {
           name: name,
           health: health,
-          heading: heading.radians,
+          heading: Serializable.rounded(heading.radians),
           dead: dead?,
-          position: position.to_h.reject{ |k,_|
-            k == :arena
-          },
+          position: Serializable.normalize(position),
           radar: {
-            heading: radar.heading.radians
+            heading: Serializable.rounded(radar.heading.radians)
           },
           turret: {
-            heading: turret.heading.radians
+            heading: Serializable.rounded(turret.heading.radians)
           }
         }
       end
@@ -23,8 +34,8 @@ module RTanque
     module Shell
       def to_h
         {
-          heading: heading.radians,
-          position: position.to_h.reject{ |k,_| k == :arena}
+          heading: Serializable.rounded(heading.radians),
+          position: Serializable.normalize(position)
         }
       end
     end
@@ -32,7 +43,7 @@ module RTanque
     module Explosion
       def to_h
         {
-          position: position.to_h.reject{ |k,_| k == :arena}
+          position: Serializable.normalize(position)
         }
       end
     end
